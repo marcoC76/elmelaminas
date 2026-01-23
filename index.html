@@ -343,6 +343,7 @@
         .prod-img {
             height: 180px;
             overflow: hidden;
+            position: relative;
         }
 
         .prod-texture {
@@ -353,6 +354,27 @@
 
         .prod-card:hover .prod-texture {
             transform: scale(1.1);
+        }
+
+        .prod-real-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+
+        .prod-real-img.loaded {
+            opacity: 1;
+        }
+
+        /* Hide texture background when image is loaded to prevent bleeding */
+        .prod-img:has(.prod-real-img.loaded) .prod-texture {
+            opacity: 0;
         }
 
         .prod-info {
@@ -483,7 +505,24 @@
             /* Specific height for mobile */
             flex-shrink: 0;
             position: relative;
+            overflow: hidden;
             /* Texture bg set by JS */
+        }
+
+        .modal-real-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+        }
+
+        .sheet-img:has(.modal-real-img.loaded) {
+            background: none !important;
         }
 
         .back-btn {
@@ -1745,41 +1784,41 @@
         // DATA
         const products = [
             // List based on the user table
-            { id: 1, name: "Mocca", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #6f5b48 0px, #5e4b3a 2px, #6f5b48 5px)", badge: "NUEVO", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 2, name: "Olmo", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #eaddcf 0px, #dcc0aa 2px, #eaddcf 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 3, name: "Oporto", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #8a5a44 0px, #754833 2px, #8a5a44 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 4, name: "Lombardía", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #888 0px, #777 2px, #888 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 5, name: "Anahuac", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #a67c52 0px, #8b6b4a 2px, #a67c52 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 6, name: "Cemento", category: "piedras", style: "stone-texture", color: "#a5a9b0", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 7, name: "Blanco Frosty", category: "unicolores", style: "solid-texture", color: "#f7f7f7", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 8, name: "Mármol Negro", category: "piedras", style: "stone-dark", color: "#111", badge: "LUJO", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 9, name: "Mármol Blanco", category: "piedras", style: "stone-texture", color: "#fff", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 10, name: "Cedro", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #a0522d 0px, #8b4513 2px, #a0522d 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 11, name: "Parota", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #5c4736 0px, #423126 2px, #5c4736 8px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 12, name: "Moscato", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #d2b48c 0px, #cdaa7d 2px, #d2b48c 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 13, name: "Textil", category: "textiles", style: "textile-texture", color: "#dcdcdc", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 14, name: "Maranelo", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #3d2b1f 0px, #2a1b0f 2px, #3d2b1f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 15, name: "Wengue Chocolate", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #2b1d0e 0px, #1a0f00 2px, #2b1d0e 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 16, name: "Linoza", category: "textiles", style: "textile-texture", color: "#e3e3e3", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 17, name: "Nogal Africano", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #4b3621 0px, #3b2b1b 2px, #4b3621 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 18, name: "Avellana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #8b5a2b 0px, #7a4a1b 2px, #8b5a2b 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 19, name: "Ébano (Negro)", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #1a1a1a 0px, #0d0d0d 2px, #1a1a1a 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 20, name: "Ébano (Gris)", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #4a4a4a 0px, #3a3a3a 2px, #4a4a4a 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 21, name: "Blanco Absoluto", category: "unicolores", style: "solid-texture", color: "#fff", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 22, name: "Riviera", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #c4a484 0px, #b39373 2px, #c4a484 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 23, name: "Fresno Bruma", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #d3d3d3 0px, #c0c0c0 2px, #d3d3d3 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 24, name: "Ártico", category: "unicolores", style: "solid-texture", color: "#e0f2f1", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 25, name: "Malta", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #deb887 0px, #cd9b6e 2px, #deb887 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 26, name: "Tzlam", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #8b4513 0px, #703a0a 2px, #8b4513 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 27, name: "Tabaco", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #3d2b1f 0px, #2a1b0f 2px, #3d2b1f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 28, name: "Monarca", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #a0522d 0px, #8b4513 2px, #a0522d 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 29, name: "Encino Polar", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #f5f5f5 0px, #e8e8e8 2px, #f5f5f5 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 30, name: "Nogal Tenue", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #bc8f8f 0px, #a67d7d 2px, #bc8f8f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 31, name: "Toscana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #d2b48c 0px, #cdaa7d 2px, #d2b48c 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 32, name: "Roble Santana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #f4a460 0px, #e39350 2px, #f4a460 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 33, name: "Gris Claro", category: "unicolores", style: "solid-texture", color: "#d3d3d3", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 34, name: "Gris Oxford", category: "unicolores", style: "solid-texture", color: "#4b4b4b", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
-            { id: 35, name: "Negro", category: "unicolores", style: "solid-texture", color: "#000", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" }
+            { id: 1, name: "Mocca", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #6f5b48 0px, #5e4b3a 2px, #6f5b48 5px)", badge: "NUEVO", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "MOCCA.png" },
+            { id: 2, name: "Olmo", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #eaddcf 0px, #dcc0aa 2px, #eaddcf 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "OLMO.png" },
+            { id: 3, name: "Oporto", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #8a5a44 0px, #754833 2px, #8a5a44 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "OPORTO.png" },
+            { id: 4, name: "Lombardía", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #888 0px, #777 2px, #888 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "LOMBARDÍA.png" },
+            { id: 5, name: "Anahuac", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #a67c52 0px, #8b6b4a 2px, #a67c52 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "ANAHUAC.jpg" },
+            { id: 6, name: "Cemento", category: "piedras", style: "stone-texture", color: "#a5a9b0", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "CEMENTO.jpg" },
+            { id: 7, name: "Blanco Frosty", category: "unicolores", style: "solid-texture", color: "#f7f7f7", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "BLANCO FROSTY.png" },
+            { id: 8, name: "Mármol Negro", category: "piedras", style: "stone-dark", color: "#111", badge: "LUJO", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "MÁRMOL NEGRO.png" },
+            { id: 9, name: "Mármol Blanco", category: "piedras", style: "stone-texture", color: "#fff", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "MÁRMOL BLANCO.png" },
+            { id: 10, name: "Cedro", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #a0522d 0px, #8b4513 2px, #a0522d 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "CEDRO.png" },
+            { id: 11, name: "Parota", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #5c4736 0px, #423126 2px, #5c4736 8px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "PAROTA.png" },
+            { id: 12, name: "Moscato", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #d2b48c 0px, #cdaa7d 2px, #d2b48c 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "MOSCATO.png" },
+            { id: 13, name: "Textil", category: "textiles", style: "textile-texture", color: "#dcdcdc", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "TEXTIL.jpg" },
+            { id: 14, name: "Maranelo", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #3d2b1f 0px, #2a1b0f 2px, #3d2b1f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "MARANELO.jpg" },
+            { id: 15, name: "Wengue Chocolate", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #2b1d0e 0px, #1a0f00 2px, #2b1d0e 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "WENGUE CHOCOLATE.jpg" },
+            { id: 16, name: "Linoza", category: "textiles", style: "textile-texture", color: "#e3e3e3", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "LINOZA.jpg" },
+            { id: 17, name: "Nogal Africano", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #4b3621 0px, #3b2b1b 2px, #4b3621 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "NOGAL AFRICANO.jpg" },
+            { id: 18, name: "Avellana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #8b5a2b 0px, #7a4a1b 2px, #8b5a2b 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "AVELLANA.png" },
+            { id: 19, name: "Ébano (Negro)", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #1a1a1a 0px, #0d0d0d 2px, #1a1a1a 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "ÉBANO.png" },
+            { id: 20, name: "Ébano (Gris)", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #4a4a4a 0px, #3a3a3a 2px, #4a4a4a 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "ÉBANO.png" },
+            { id: 21, name: "Blanco Absoluto", category: "unicolores", style: "solid-texture", color: "#fff", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "BLANCO ABSOLUTO.png" },
+            { id: 22, name: "Riviera", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #c4a484 0px, #b39373 2px, #c4a484 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "RIVIERA.png" },
+            { id: 23, name: "Fresno Bruma", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #d3d3d3 0px, #c0c0c0 2px, #d3d3d3 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "FRESNO BRUMA.png" },
+            { id: 24, name: "Ártico", category: "unicolores", style: "solid-texture", color: "#e0f2f1", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "ÁRTICO.jpg" },
+            { id: 25, name: "Malta", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #deb887 0px, #cd9b6e 2px, #deb887 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "MALTA.png" },
+            { id: 26, name: "Tzlam", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #8b4513 0px, #703a0a 2px, #8b4513 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "TZLAM.png" },
+            { id: 27, name: "Tabaco", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #3d2b1f 0px, #2a1b0f 2px, #3d2b1f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "TABACO.png" },
+            { id: 28, name: "Monarca", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #a0522d 0px, #8b4513 2px, #a0522d 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "MONARCA.png" },
+            { id: 29, name: "Encino Polar", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #f5f5f5 0px, #e8e8e8 2px, #f5f5f5 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "ENCINO POLAR.png" },
+            { id: 30, name: "Nogal Tenue", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #bc8f8f 0px, #a67d7d 2px, #bc8f8f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "NOGAL TENUE.png" },
+            { id: 31, name: "Toscana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #d2b48c 0px, #cdaa7d 2px, #d2b48c 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "TOSCANA.png" },
+            { id: 32, name: "Roble Santana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #f4a460 0px, #e39350 2px, #f4a460 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "ROBLE SANTANA.png" },
+            { id: 33, name: "Gris Claro", category: "unicolores", style: "solid-texture", color: "#d3d3d3", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "GRIS CLARO.png" },
+            { id: 34, name: "Gris Oxford", category: "unicolores", style: "solid-texture", color: "#4b4b4b", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "GRIS OXFORD.png" },
+            { id: 35, name: "Negro", category: "unicolores", style: "solid-texture", color: "#000", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos", image: "NEGRO.png" }
         ];
 
         const blogArticles = [
@@ -1935,6 +1974,7 @@
                 card.innerHTML = `
                     ${badgeHtml}
                     <div class="prod-img">
+                        <img src="fotos/${p.image}" class="prod-real-img" alt="${p.name}" onload="this.classList.add('loaded')" onerror="this.style.display='none'">
                         <div class="prod-texture ${p.style}" style="${bgStyle}"></div>
                     </div>
                     <div class="prod-info">
@@ -2028,6 +2068,23 @@
 
             // Set image texture/color
             const imgContainer = document.getElementById('modalImg');
+
+            // Remove previous real image if exists
+            const oldImg = imgContainer.querySelector('.modal-real-img');
+            if (oldImg) oldImg.remove();
+
+            // Add real image
+            const realImg = document.createElement('img');
+            realImg.src = `fotos/${p.image}`;
+            realImg.className = 'modal-real-img';
+            realImg.style.cssText = 'position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; transition: opacity 0.5s; z-index:1;';
+            realImg.onload = () => {
+                realImg.style.opacity = '1';
+                realImg.classList.add('loaded');
+            };
+            realImg.onerror = () => realImg.style.display = 'none';
+            imgContainer.appendChild(realImg);
+
             let bgStyle = `background: ${p.color}`;
             imgContainer.setAttribute('style', bgStyle);
             // Re-apply class for texture patterns
