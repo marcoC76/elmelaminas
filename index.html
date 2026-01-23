@@ -95,8 +95,22 @@
             overflow-x: hidden;
         }
 
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: var(--bg-body);
+        }
+
         h1,
-        h2,
+        h2 {
+            margin: 0;
+        }
+
         h3 {
             font-family: 'Playfair Display', serif;
         }
@@ -230,7 +244,7 @@
             width: 100%;
             padding: 30px;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: #fff;
+            color: #ffffff;
             z-index: 2;
             /* Ensure on top of bg */
         }
@@ -1191,11 +1205,13 @@
 
 <body>
 
+    <canvas id="bg-canvas"></canvas>
+
     <div class="container">
         <!-- HEADER -->
         <div class="top-bar">
             <div class="brand">
-                <img src="el melaminas logo.jpg" alt="El Melaminas Logo" class="brand-logo">
+                <img src="elmelaminas.png" alt="El Melaminas Logo" class="brand-logo">
             </div>
 
             <nav class="desktop-nav" style="display: none;"> <!-- Visible on desktop via CSS -->
@@ -1223,9 +1239,10 @@
             <div class="hero-bg" id="heroBg"></div>
             <div class="hero-overlay">
                 <div class="hero-tag">COLECCIÓN 2026</div>
-                <h2 class="hero-title serif-font">Materializa tus Ideas<br>con Elegancia</h2>
-                <div style="font-size: 0.9rem; margin-bottom: 20px; opacity: 0.9;">Tableros de alta gama para proyectos
-                    exigentes.</div>
+                <h2 class="hero-title serif-font" style="margin-top: 10px; margin-bottom: 20px;">Materializa tus
+                    Ideas<br>con Elegancia</h2>
+                <div style="font-size: 0.95rem; margin-bottom: 25px; opacity: 0.9; line-height: 1.4; max-width: 500px;">
+                    Tableros de alta gama para proyectos exigentes.</div>
                 <div class="btn-hero" onclick="document.getElementById('catalogo').scrollIntoView()">Ver Catálogo</div>
             </div>
         </div>
@@ -1263,9 +1280,6 @@
                 <!-- Injected via JS -->
             </div>
         </div>
-    </div>
-
-    </div>
     </div>
 
     <!-- WHY CHOOSE US -->
@@ -1361,45 +1375,82 @@
     </section>
 
     <!-- TRENDS & BLOG (Improvement 5) -->
-    <section class="container reveal trends-section">
-        <div class="flex-between">
-            <h3 class="section-title">Tendencias 2026</h3>
-            <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; cursor: pointer;">Leer Blog</span>
-        </div>
-        <div class="trends-grid">
-            <article class="trend-card" onclick="openBlogModal(0)">
-                <div class="trend-img"
-                    style="background-image: url('https://images.unsplash.com/photo-1513519247388-19345ed5d467?w=400&q=80');">
-                </div>
-                <div class="trend-content">
-                    <div class="trend-date">Enero 2026</div>
-                    <h4 style="margin-bottom: 10px;">Madera y Minimalismo</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-grey);">Cómo los tonos claros de roble están
-                        dominando los espacios abiertos...</p>
-                </div>
-            </article>
-            <article class="trend-card" onclick="openBlogModal(1)">
-                <div class="trend-img"
-                    style="background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&q=80');">
-                </div>
-                <div class="trend-content">
-                    <div class="trend-date">Diciembre 2025</div>
-                    <h4 style="margin-bottom: 10px;">Texturas de Piedra Natural</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-grey);">El regreso de los acabados marmolados en
-                        cocinas de alto tráfico...</p>
-                </div>
-            </article>
-            <article class="trend-card" onclick="openBlogModal(2)">
-                <div class="trend-img"
-                    style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=80');">
-                </div>
-                <div class="trend-content">
-                    <div class="trend-date">Noviembre 2025</div>
-                    <h4 style="margin-bottom: 10px;">Nuevos Negros Matte</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-grey);">La elegancia atemporal del negro profundo en
-                        herrajes y cubiertas...</p>
-                </div>
-            </article>
+    <section class="trends-section reveal">
+        <div class="container">
+            <div class="flex-between">
+                <h3 class="section-title">Tendencias 2026</h3>
+                <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; cursor: pointer;">Leer
+                    Blog</span>
+            </div>
+            <div class="trends-grid">
+                <article class="trend-card" onclick="openBlogModal(0)">
+                    <div class="trend-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1513519247388-19345ed5d467?w=400&q=80');">
+                    </div>
+                    <div class="trend-content">
+                        <div class="trend-date">Enero 2026</div>
+                        <h4 style="margin-bottom: 10px;">Madera y Minimalismo</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-grey);">Cómo los tonos claros de roble están
+                            dominando los espacios abiertos...</p>
+                    </div>
+                </article>
+                <article class="trend-card" onclick="openBlogModal(1)">
+                    <div class="trend-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&q=80');">
+                    </div>
+                    <div class="trend-content">
+                        <div class="trend-date">Diciembre 2025</div>
+                        <h4 style="margin-bottom: 10px;">Texturas de Piedra Natural</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-grey);">El regreso de los acabados marmolados en
+                            cocinas de alto tráfico...</p>
+                    </div>
+                </article>
+                <article class="trend-card" onclick="openBlogModal(2)">
+                    <div class="trend-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=80');">
+                    </div>
+                    <div class="trend-content">
+                        <div class="trend-date">Noviembre 2025</div>
+                        <h4 style="margin-bottom: 10px;">Nuevos Negros Matte</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-grey);">La elegancia atemporal del negro
+                            profundo en
+                            herrajes y cubiertas...</p>
+                    </div>
+                </article>
+                <article class="trend-card" onclick="openBlogModal(3)">
+                    <div class="trend-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=400&q=80');">
+                    </div>
+                    <div class="trend-content">
+                        <div class="trend-date">Octubre 2025</div>
+                        <h4 style="margin-bottom: 10px;">Vetas Sincronizadas</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-grey);">La tecnología que permite sentir la
+                            madera real al tacto en cada tablero...</p>
+                    </div>
+                </article>
+                <article class="trend-card" onclick="openBlogModal(4)">
+                    <div class="trend-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&q=80');">
+                    </div>
+                    <div class="trend-content">
+                        <div class="trend-date">Septiembre 2025</div>
+                        <h4 style="margin-bottom: 10px;">Espacios Multifuncionales</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-grey);">Soluciones inteligentes de mobiliario
+                            para hogares pequeños y oficinas...</p>
+                    </div>
+                </article>
+                <article class="trend-card" onclick="openBlogModal(5)">
+                    <div class="trend-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=400&q=80');">
+                    </div>
+                    <div class="trend-content">
+                        <div class="trend-date">Agosto 2025</div>
+                        <h4 style="margin-bottom: 10px;">Sustentabilidad en el Diseño</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-grey);">Nuestra apuesta por procesos
+                            eco-friendly y maderas certificadas...</p>
+                    </div>
+                </article>
+            </div>
         </div>
     </section>
 
@@ -1525,7 +1576,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="brand" style="margin-bottom: 1.5rem;">
-                        <img src="el melaminas logo.jpg" alt="El Melaminas Logo" class="brand-logo"
+                        <img src="elmelaminas.png" alt="El Melaminas Logo" class="brand-logo"
                             style="height: 60px; filter: brightness(1.1);">
                     </div>
                     <p>Expertos en soluciones para mobiliario desde 1996. Transformamos espacios con materiales de
@@ -1693,37 +1744,86 @@
     <script>
         // DATA
         const products = [
-            // MADERAS
-            { id: 1, name: "Mocca Elite", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #6f5b48 0px, #5e4b3a 2px, #6f5b48 5px)", badge: "NUEVO" },
-            { id: 2, name: "Olmo Nórdico", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #eaddcf 0px, #dcc0aa 2px, #eaddcf 6px)", badge: "PREMIUM" },
-            { id: 3, name: "Oporto", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #8a5a44 0px, #754833 2px, #8a5a44 6px)" },
-            { id: 4, name: "Lombardía", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #888 0px, #777 2px, #888 6px)" },
-            { id: 7, name: "Parota Exótica", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #5c4736 0px, #423126 2px, #5c4736 8px, #332211 9px)", badge: "TOP" },
-            { id: 10, name: "Wengue", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #382c26 0px, #261c18 2px, #382c26 5px)" },
-            // PIEDRAS
-            { id: 25, name: "Cemento Urban", category: "piedras", style: "stone-texture", color: "#a5a9b0" },
-            { id: 26, name: "Mármol Negro", category: "piedras", style: "stone-dark", color: "#111", badge: "LUJO" },
-            { id: 27, name: "Carrara", category: "piedras", style: "stone-texture", color: "#f9f9f9" },
-            // UNICOLORES
-            { id: 32, name: "Negro Matte", category: "unicolores", style: "solid-texture", color: "#111" },
-            { id: 34, name: "Lino Grafito", category: "textiles", style: "textile-texture", color: "#aaa" },
+            // List based on the user table
+            { id: 1, name: "Mocca", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #6f5b48 0px, #5e4b3a 2px, #6f5b48 5px)", badge: "NUEVO", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 2, name: "Olmo", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #eaddcf 0px, #dcc0aa 2px, #eaddcf 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 3, name: "Oporto", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #8a5a44 0px, #754833 2px, #8a5a44 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 4, name: "Lombardía", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #888 0px, #777 2px, #888 6px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 5, name: "Anahuac", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #a67c52 0px, #8b6b4a 2px, #a67c52 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 6, name: "Cemento", category: "piedras", style: "stone-texture", color: "#a5a9b0", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 7, name: "Blanco Frosty", category: "unicolores", style: "solid-texture", color: "#f7f7f7", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 8, name: "Mármol Negro", category: "piedras", style: "stone-dark", color: "#111", badge: "LUJO", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 9, name: "Mármol Blanco", category: "piedras", style: "stone-texture", color: "#fff", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 10, name: "Cedro", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #a0522d 0px, #8b4513 2px, #a0522d 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 11, name: "Parota", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #5c4736 0px, #423126 2px, #5c4736 8px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 12, name: "Moscato", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #d2b48c 0px, #cdaa7d 2px, #d2b48c 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 13, name: "Textil", category: "textiles", style: "textile-texture", color: "#dcdcdc", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 14, name: "Maranelo", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #3d2b1f 0px, #2a1b0f 2px, #3d2b1f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 15, name: "Wengue Chocolate", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #2b1d0e 0px, #1a0f00 2px, #2b1d0e 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 16, name: "Linoza", category: "textiles", style: "textile-texture", color: "#e3e3e3", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 17, name: "Nogal Africano", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #4b3621 0px, #3b2b1b 2px, #4b3621 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 18, name: "Avellana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #8b5a2b 0px, #7a4a1b 2px, #8b5a2b 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 19, name: "Ébano (Negro)", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #1a1a1a 0px, #0d0d0d 2px, #1a1a1a 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 20, name: "Ébano (Gris)", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #4a4a4a 0px, #3a3a3a 2px, #4a4a4a 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 21, name: "Blanco Absoluto", category: "unicolores", style: "solid-texture", color: "#fff", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 22, name: "Riviera", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #c4a484 0px, #b39373 2px, #c4a484 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 23, name: "Fresno Bruma", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #d3d3d3 0px, #c0c0c0 2px, #d3d3d3 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 24, name: "Ártico", category: "unicolores", style: "solid-texture", color: "#e0f2f1", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 25, name: "Malta", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #deb887 0px, #cd9b6e 2px, #deb887 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 26, name: "Tzlam", category: "maderas", style: "wood-red", color: "repeating-linear-gradient(90deg, #8b4513 0px, #703a0a 2px, #8b4513 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 27, name: "Tabaco", category: "maderas", style: "wood-dark", color: "repeating-linear-gradient(90deg, #3d2b1f 0px, #2a1b0f 2px, #3d2b1f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 28, name: "Monarca", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #a0522d 0px, #8b4513 2px, #a0522d 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 29, name: "Encino Polar", category: "maderas", style: "wood-grey", color: "repeating-linear-gradient(90deg, #f5f5f5 0px, #e8e8e8 2px, #f5f5f5 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 30, name: "Nogal Tenue", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #bc8f8f 0px, #a67d7d 2px, #bc8f8f 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 31, name: "Toscana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #d2b48c 0px, #cdaa7d 2px, #d2b48c 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 32, name: "Roble Santana", category: "maderas", style: "wood-texture", color: "repeating-linear-gradient(90deg, #f4a460 0px, #e39350 2px, #f4a460 5px)", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 33, name: "Gris Claro", category: "unicolores", style: "solid-texture", color: "#d3d3d3", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 34, name: "Gris Oxford", category: "unicolores", style: "solid-texture", color: "#4b4b4b", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" },
+            { id: 35, name: "Negro", category: "unicolores", style: "solid-texture", color: "#000", format: "1.22 x 2.44 m", thickness: "15 mm", faces: "2 caras", safety: "Libre de formaldehído y tóxicos" }
         ];
 
         const blogArticles = [
             {
                 title: "Madera y Minimalismo: El Renacimiento del Roble",
                 date: "Enero 2026",
-                body: `<p>El diseño de interiores para el 2026 marca una clara tendencia hacia la honestidad de los materiales. La melamina con veta de roble claro se ha convertido en la protagonista indiscutible de los hogares modernos.</p><p>Esta tendencia busca maximizar la luz natural combinando mobiliario en tonos miel con paredes blancas y plantas naturales. La clave está en la textura "Sincronizada", que permite sentir el relieve de la madera al tacto, elevando la percepción de calidad en cualquier proyecto residencial.</p>`
+                body: `<p>El diseño de interiores para el 2026 marca una clara tendencia hacia la honestidad de los materiales. La melamina con veta de roble claro se ha convertido en la protagonista indiscutible de los hogares modernos, buscando una conexión más profunda con la naturaleza sin sacrificar la practicidad.</p>
+                       <p>Esta tendencia, a menudo denominada "Japandi Moderno", busca maximizar la luz natural combinando mobiliario en tonos miel con paredes blancas hueso y texturas orgánicas como el lino y la piedra. La clave del éxito en estos proyectos reside en la textura "Sincronizada" de nuestros tableros, que permite sentir el relieve de la madera real al tacto, elevando la percepción de calidad y lujo en cualquier espacio residencial.</p>
+                       <p><strong>Consejo de diseño:</strong> Utilice grandes formatos de tablero para minimizar las juntas y crear una sensación de continuidad visual que amplíe los espacios pequeños.</p>`
             },
             {
-                title: "Piedra Natural: Elegancia Industrial",
+                title: "Piedra Natural: Elegancia Industrial y Sofisticada",
                 date: "Diciembre 2025",
-                body: `<p>Las cubiertas que imitan el mármol y la piedra volcánica están redefiniendo las cocinas mexicanas. El contraste entre materiales fríos como la piedra y elementos cálidos como la iluminación indirecta crea un ambiente de hotel boutique en casa.</p><p>Nuestras melaminas de la colección 'Piedras' ofrecen esta estética de alto impacto con la ventaja de una durabilidad superior y cero mantenimiento comparado con la piedra real.</p>`
+                body: `<p>Las cubiertas que imitan el mármol, el granito y la piedra volcánica están redefiniendo las cocinas mexicanas de alta gama. El contraste entre materiales visualmente fríos como la piedra y elementos cálidos como la iluminación LED indirecta crea un ambiente de hotel boutique directamente en tu hogar.</p>
+                       <p>Nuestras melaminas de la colección 'Piedras' ofrecen esta estética de alto impacto visual con la ventaja técnica de una durabilidad superior: son resistentes a las manchas, fáciles de desinfectar y requieren cero mantenimiento comparado con la piedra natural porosa. Son ideales para familias activas que no quieren renunciar al estilo.</p>
+                       <p>Para el 2026, veremos una integración total de estas texturas no solo en cocinas, sino también en revestimientos de muros de salas y chimeneas modernas.</p>`
             },
             {
-                title: "La Magia del Negro Matte",
+                title: "La Magia del Negro Matte: Profundidad y Carácter",
                 date: "Noviembre 2025",
-                body: `<p>El negro ya no es un color de acento, es una elección de estilo completa. El acabado 'Matte' absoluto elimina reflejos innecesarios y huellas dactilares, permitiendo que la forma del mueble hable por sí misma.</p><p>Ideal para oficinas de diseño y estudios creativos donde la sobriedad es sinónimo de profesionalismo.</p>`
+                body: `<p>El negro ya no es simplemente un color de acento; se ha consolidado como una elección de estilo completa y audaz. El acabado 'Matte' absoluto de nuestra línea de unicolores elimina los reflejos innecesarios y las molestas huellas dactilares, permitiendo que la forma pura del mueble sea la que hable por sí misma.</p>
+                       <p>Este acabado es especialmente popular en oficinas de diseño, estudios creativos y cocinas abiertas donde la sobriedad es sinónimo de profesionalismo y elegancia. Al combinarlo con maderas claras o detalles en metal dorado, se logra un equilibrio perfecto entre lo moderno y lo clásico.</p>
+                       <p><strong>Especificación Técnica:</strong> Nuestra tecnología anti-huella asegura que la superficie mantenga su aspecto aterciopelado incluso con el uso diario intenso.</p>`
+            },
+            {
+                title: "Vetas Sincronizadas: El Tacto de lo Real en cada Detalle",
+                date: "Octubre 2025",
+                body: `<p>La tecnología de poro sincronizado ha marcado un antes y un después en la industria de la melamina a nivel global. Al hacer coincidir matemáticamente la textura táctil con el dibujo visual de la veta impresa, logramos un material que es prácticamente indistinguible de la madera natural, incluso para el ojo experto.</p>
+                       <p>Esta colección es la respuesta perfecta para arquitectos y diseñadores que buscan la calidez y el prestigio de la madera sólida pero necesitan la consistencia, resistencia y facilidad de transformación que solo un tablero industrial de alta densidad puede ofrecer.</p>
+                       <p>Desde muebles de baño hasta revestimientos comerciales de alto tráfico, las vetas sincronizadas ofrecen una solución estética sin precedentes con un costo-beneficio inigualable.</p>`
+            },
+            {
+                title: "Espacios Multifuncionales: Adaptabilidad para la Vida Moderna",
+                date: "Septiembre 2025",
+                body: `<p>El hogar actual ha evolucionado y ya no permite habitaciones con un solo propósito. La cocina hoy es oficina, el dormitorio es estudio y la sala es zona de juegos. El diseño de mobiliario inteligente se adapta a esta realidad con piezas versátiles, modulares y estéticamente neutras que no sobrecargan el ambiente.</p>
+                       <p>En este contexto, nuestras colecciones de unicolores y textiles (como el Lino Grafito) ofrecen la base neutra ideal para crear estos espacios armónicos. La clave es el equilibrio: mobiliario funcional que parece decoración cuando no está en uso.</p>
+                       <p>Aprovechar cada centímetro cuadrado con diseños a medida elaborados con materiales de alta calidad es la mejor inversión para mejorar la calidad de vida urbana.</p>`
+            },
+            {
+                title: "Compromiso con la Sustentabilidad: Diseño con Conciencia",
+                date: "Agosto 2025",
+                body: `<p>En El Melaminas, entendemos profundamente que el futuro del diseño debe ser sustentable o no será. Nuestro compromiso no es solo una palabra; trabajamos exclusivamente con proveedores globales que cuentan con las más estrictas certificaciones de manejo forestal responsable y economía circular.</p>
+                       <p>Nuestros procesos de logística y distribución están optimizados para reducir la huella de carbono, y nos aseguramos de que cada tablero que llega a tus manos sea el resultado de una cadena de valor ética, transparente y consciente del medio ambiente.</p>
+                       <p>Al elegir nuestros materiales, no solo estás eligiendo belleza y durabilidad, sino que también estás apoyando una industria que protege los recursos para las generaciones venideras.</p>`
             }
         ];
 
@@ -1933,6 +2033,33 @@
             // Re-apply class for texture patterns
             imgContainer.className = `sheet-img ${p.style}`;
 
+            // Actualizar especificaciones técnicas
+            const specBoxes = document.querySelectorAll('.spec-box');
+            specBoxes[0].querySelector('.spec-val').innerText = p.format || "1.22 x 2.44 m";
+            specBoxes[1].querySelector('.spec-val').innerText = p.thickness || "15 mm";
+
+            // Insertar o actualizar caras y seguridad si no existen
+            let specGrid = document.querySelector('.spec-grid');
+            let extraSpecs = document.getElementById('extraSpecs');
+            if (!extraSpecs) {
+                extraSpecs = document.createElement('div');
+                extraSpecs.id = 'extraSpecs';
+                extraSpecs.className = 'spec-grid';
+                extraSpecs.style.marginTop = '15px';
+                specGrid.parentNode.insertBefore(extraSpecs, specGrid.nextSibling);
+            }
+
+            extraSpecs.innerHTML = `
+                <div class="spec-box">
+                    <div class="spec-label"><i class="ph-bold ph-stack"></i> Número de Caras</div>
+                    <div class="spec-val">${p.faces || "2 caras"}</div>
+                </div>
+                <div class="spec-box">
+                    <div class="spec-label"><i class="ph-bold ph-leaf"></i> Seguridad</div>
+                    <div class="spec-val" style="font-size: 0.7rem;">${p.safety || "Grado E1 / Ecológico"}</div>
+                </div>
+            `;
+
             // Config WhatsApp with better details
             const isLiked = favorites.includes(p.id) ? 'liked' : '';
             const likeBtn = modal.querySelector('.like-btn');
@@ -2029,7 +2156,83 @@
             }, 1500);
         }
 
+        // BACKGROUND ANIMATION ENGINE
+        class BackgroundEngine {
+            constructor() {
+                this.canvas = document.getElementById('bg-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.count = 45;
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+                this.init();
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            init() {
+                const colors = ['#6f5b48', '#eaddcf', '#8a5a44', '#a67c52', '#dcdcdc'];
+                for (let i = 0; i < this.count; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        size: Math.random() * 80 + 40,
+                        angle: Math.random() * Math.PI * 2,
+                        rotation: Math.random() * 0.01 - 0.005,
+                        speedX: Math.random() * 0.4 - 0.2,
+                        speedY: Math.random() * 0.4 - 0.2,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        opacity: Math.random() * 0.08 + 0.05
+                    });
+                }
+                this.animate();
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.particles.forEach(p => {
+                    this.ctx.save();
+                    this.ctx.translate(p.x, p.y);
+                    this.ctx.rotate(p.angle);
+                    this.ctx.globalAlpha = p.opacity;
+                    this.ctx.fillStyle = p.color;
+
+                    // Specific square shape (melamine tile)
+                    this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+
+                    // Optional: subtle border to look like a tile
+                    this.ctx.strokeStyle = p.color;
+                    this.ctx.lineWidth = 1;
+                    this.ctx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size);
+
+                    this.ctx.restore();
+
+                    // Update position
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.angle += p.rotation;
+
+                    // Bound checks
+                    if (p.x < -p.size) p.x = this.canvas.width + p.size;
+                    if (p.x > this.canvas.width + p.size) p.x = -p.size;
+                    if (p.y < -p.size) p.y = this.canvas.height + p.size;
+                    if (p.y > this.canvas.height + p.size) p.y = -p.size;
+                });
+            }
+
+            animate() {
+                this.draw();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
         renderProducts();
+
+        // Initialize Engine
+        const bgEngine = new BackgroundEngine();
 
         // Init GSAP after load to ensure layout positions are correct
         window.addEventListener('load', () => {
