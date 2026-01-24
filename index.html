@@ -513,6 +513,7 @@
             position: relative;
             overflow: hidden;
             /* Texture bg set by JS */
+            background: var(--bg-body);
         }
 
         .modal-real-img {
@@ -523,8 +524,17 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.5s, transform 0.3s ease-out;
             z-index: 1;
+            cursor: zoom-in;
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        .modal-real-img.zoomed {
+            cursor: zoom-out;
+            transform: scale(2.2);
+            z-index: 20;
         }
 
         .sheet-img:has(.modal-real-img.loaded) {
@@ -1772,6 +1782,11 @@
                     <div id="blogDate" class="trend-date"></div>
                     <i class="ph ph-x" onclick="closeBlogModal()" style="cursor:pointer; font-size: 1.5rem;"></i>
                 </div>
+                <div id="blogImageContainer"
+                    style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; height: 250px; display: none;">
+                    <img id="blogModalImage" src="" alt="Blog Post Image"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
                 <h2 id="blogTitle" class="serif-font" style="font-size: 2.2rem; margin-bottom: 20px;"></h2>
                 <div id="blogBody" style="line-height: 1.8; color: var(--text-grey);"></div>
                 <button class="btn-hero" onclick="closeBlogModal()"
@@ -1825,6 +1840,7 @@
             {
                 title: "Madera y Minimalismo: El Renacimiento del Roble",
                 date: "Enero 2026",
+                image: "fotos/blog-1.jpg",
                 body: `<p>El diseño de interiores para el 2026 marca una clara tendencia hacia la honestidad de los materiales. La melamina con veta de roble claro se ha convertido en la protagonista indiscutible de los hogares modernos, buscando una conexión más profunda con la naturaleza sin sacrificar la practicidad.</p>
                        <p>Esta tendencia, a menudo denominada "Japandi Moderno", busca maximizar la luz natural combinando mobiliario en tonos miel con paredes blancas hueso y texturas orgánicas como el lino y la piedra. La clave del éxito en estos proyectos reside en la textura "Sincronizada" de nuestros tableros, que permite sentir el relieve de la madera real al tacto, elevando la percepción de calidad y lujo en cualquier espacio residencial.</p>
                        <p><strong>Consejo de diseño:</strong> Utilice grandes formatos de tablero para minimizar las juntas y crear una sensación de continuidad visual que amplíe los espacios pequeños.</p>`
@@ -1832,6 +1848,7 @@
             {
                 title: "Piedra Natural: Elegancia Industrial y Sofisticada",
                 date: "Diciembre 2025",
+                image: "fotos/blog-4.jpg",
                 body: `<p>Las cubiertas que imitan el mármol, el granito y la piedra volcánica están redefiniendo las cocinas mexicanas de alta gama. El contraste entre materiales visualmente fríos como la piedra y elementos cálidos como la iluminación LED indirecta crea un ambiente de hotel boutique directamente en tu hogar.</p>
                        <p>Nuestras melaminas de la colección 'Piedras' ofrecen esta estética de alto impacto visual con la ventaja técnica de una durabilidad superior: son resistentes a las manchas, fáciles de desinfectar y requieren cero mantenimiento comparado con la piedra natural porosa. Son ideales para familias activas que no quieren renunciar al estilo.</p>
                        <p>Para el 2026, veremos una integración total de estas texturas no solo en cocinas, sino también en revestimientos de muros de salas y chimeneas modernas.</p>`
@@ -1839,6 +1856,7 @@
             {
                 title: "La Magia del Negro Matte: Profundidad y Carácter",
                 date: "Noviembre 2025",
+                image: "fotos/blog-3.jpg",
                 body: `<p>El negro ya no es simplemente un color de acento; se ha consolidado como una elección de estilo completa y audaz. El acabado 'Matte' absoluto de nuestra línea de unicolores elimina los reflejos innecesarios y las molestas huellas dactilares, permitiendo que la forma pura del mueble sea la que hable por sí misma.</p>
                        <p>Este acabado es especialmente popular en oficinas de diseño, estudios creativos y cocinas abiertas donde la sobriedad es sinónimo de profesionalismo y elegancia. Al combinarlo con maderas claras o detalles en metal dorado, se logra un equilibrio perfecto entre lo moderno y lo clásico.</p>
                        <p><strong>Especificación Técnica:</strong> Nuestra tecnología anti-huella asegura que la superficie mantenga su aspecto aterciopelado incluso con el uso diario intenso.</p>`
@@ -1846,6 +1864,7 @@
             {
                 title: "Vetas Sincronizadas: El Tacto de lo Real en cada Detalle",
                 date: "Octubre 2025",
+                image: "fotos/blog-2.jpg",
                 body: `<p>La tecnología de poro sincronizado ha marcado un antes y un después en la industria de la melamina a nivel global. Al hacer coincidir matemáticamente la textura táctil con el dibujo visual de la veta impresa, logramos un material que es prácticamente indistinguible de la madera natural, incluso para el ojo experto.</p>
                        <p>Esta colección es la respuesta perfecta para arquitectos y diseñadores que buscan la calidez y el prestigio de la madera sólida pero necesitan la consistencia, resistencia y facilidad de transformación que solo un tablero industrial de alta densidad puede ofrecer.</p>
                        <p>Desde muebles de baño hasta revestimientos comerciales de alto tráfico, las vetas sincronizadas ofrecen una solución estética sin precedentes con un costo-beneficio inigualable.</p>`
@@ -1853,6 +1872,7 @@
             {
                 title: "Espacios Multifuncionales: Adaptabilidad para la Vida Moderna",
                 date: "Septiembre 2025",
+                image: "fotos/blog-5.jpg",
                 body: `<p>El hogar actual ha evolucionado y ya no permite habitaciones con un solo propósito. La cocina hoy es oficina, el dormitorio es estudio y la sala es zona de juegos. El diseño de mobiliario inteligente se adapta a esta realidad con piezas versátiles, modulares y estéticamente neutras que no sobrecargan el ambiente.</p>
                        <p>En este contexto, nuestras colecciones de unicolores y textiles (como el Lino Grafito) ofrecen la base neutra ideal para crear estos espacios armónicos. La clave es el equilibrio: mobiliario funcional que parece decoración cuando no está en uso.</p>
                        <p>Aprovechar cada centímetro cuadrado con diseños a medida elaborados con materiales de alta calidad es la mejor inversión para mejorar la calidad de vida urbana.</p>`
@@ -1860,6 +1880,7 @@
             {
                 title: "Compromiso con la Sustentabilidad: Diseño con Conciencia",
                 date: "Agosto 2025",
+                image: "fotos/blog-6.jpg",
                 body: `<p>En El Melaminas, entendemos profundamente que el futuro del diseño debe ser sustentable o no será. Nuestro compromiso no es solo una palabra; trabajamos exclusivamente con proveedores globales que cuentan con las más estrictas certificaciones de manejo forestal responsable y economía circular.</p>
                        <p>Nuestros procesos de logística y distribución están optimizados para reducir la huella de carbono, y nos aseguramos de que cada tablero que llega a tus manos sea el resultado de una cadena de valor ética, transparente y consciente del medio ambiente.</p>
                        <p>Al elegir nuestros materiales, no solo estás eligiendo belleza y durabilidad, sino que también estás apoyando una industria que protege los recursos para las generaciones venideras.</p>`
@@ -2131,6 +2152,50 @@
             modal.style.display = 'flex';
             // Small delay for animation
             setTimeout(() => modal.classList.add('open'), 10);
+
+            // Init Zoom listeners only once
+            initProductZoom();
+        }
+
+        function initProductZoom() {
+            const container = document.getElementById('modalImg');
+            // Remove old listeners to avoid stacking
+            const newContainer = container.cloneNode(true);
+            container.parentNode.replaceChild(newContainer, container);
+
+            newContainer.addEventListener('click', function (e) {
+                const img = this.querySelector('.modal-real-img');
+                if (!img) return;
+                img.classList.toggle('zoomed');
+                if (!img.classList.contains('zoomed')) {
+                    img.style.transformOrigin = 'center center';
+                }
+            });
+
+            newContainer.addEventListener('mousemove', function (e) {
+                const img = this.querySelector('.modal-real-img');
+                if (!img || !img.classList.contains('zoomed')) return;
+
+                const rect = this.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                img.style.transformOrigin = `${x}% ${y}%`;
+            });
+
+            // Touch support for mobile zoom
+            newContainer.addEventListener('touchmove', function (e) {
+                const img = this.querySelector('.modal-real-img');
+                if (!img || !img.classList.contains('zoomed')) return;
+                e.preventDefault();
+
+                const touch = e.touches[0];
+                const rect = this.getBoundingClientRect();
+                const x = ((touch.clientX - rect.left) / rect.width) * 100;
+                const y = ((touch.clientY - rect.top) / rect.height) * 100;
+
+                img.style.transformOrigin = `${x}% ${y}%`;
+            }, { passive: false });
         }
 
         function closeModal() {
@@ -2148,6 +2213,16 @@
             document.getElementById('blogTitle').innerText = article.title;
             document.getElementById('blogDate').innerText = article.date;
             document.getElementById('blogBody').innerHTML = article.body;
+
+            // Handle Blog Image
+            const imgContainer = document.getElementById('blogImageContainer');
+            const modalImg = document.getElementById('blogModalImage');
+            if (article.image) {
+                modalImg.src = article.image;
+                imgContainer.style.display = 'block';
+            } else {
+                imgContainer.style.display = 'none';
+            }
 
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('open'), 10);
