@@ -230,7 +230,7 @@
             width: 100%;
             height: 120%;
             /* Taller than container for movement */
-            background-image: url('https://images.unsplash.com/photo-1617104424032-b9bd6972d0e4?q=80&w=2000&auto=format&fit=crop');
+            background-image: url('fotos/hero.jpg');
             background-size: cover;
             background-position: center;
             z-index: 1;
@@ -513,7 +513,6 @@
             position: relative;
             overflow: hidden;
             /* Texture bg set by JS */
-            background: var(--bg-body);
         }
 
         .modal-real-img {
@@ -524,17 +523,8 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 0.5s, transform 0.3s ease-out;
+            transition: opacity 0.5s;
             z-index: 1;
-            cursor: zoom-in;
-            transform-origin: center center;
-            will-change: transform;
-        }
-
-        .modal-real-img.zoomed {
-            cursor: zoom-out;
-            transform: scale(2.2);
-            z-index: 20;
         }
 
         .sheet-img:has(.modal-real-img.loaded) {
@@ -1275,8 +1265,18 @@
                 <a href="#contacto">Contacto</a>
             </nav>
 
-            <div class="flex-between" style="gap: 10px;">
-                <button class="icon-btn" onclick="toggleTheme()">
+            <div class="flex-between" style="gap: 15px;">
+                <div class="social-links-nav" style="display: flex; gap: 10px;">
+                    <a href="https://www.facebook.com/share/16wc5EqLiG/?mibextid=wwXIfr" target="_blank"
+                        style="color: var(--text-dark);"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="https://www.instagram.com/el_melaminas?igsh=MTV0NzMxcGVhZ3JwOQ==" target="_blank"
+                        style="color: var(--text-dark);"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="https://wa.me/525551597562" target="_blank" style="color: var(--text-dark);"><i
+                            class="ph ph-whatsapp-logo"></i></a>
+                    <a href="https://www.tiktok.com/@elmelaminas" target="_blank" style="color: var(--text-dark);"><i
+                            class="ph ph-tiktok-logo"></i></a>
+                </div>
+                <button class="icon-btn" onclick="toggleTheme()" style="margin-left: 5px;">
                     <i id="themeIcon" class="ph ph-moon"></i>
                 </button>
             </div>
@@ -1294,10 +1294,11 @@
             <div class="hero-bg" id="heroBg"></div>
             <div class="hero-overlay">
                 <div class="hero-tag">COLECCIÓN 2026</div>
-                <h2 class="hero-title serif-font" style="margin-top: 10px; margin-bottom: 20px;">Materializa tus
-                    Ideas<br>con Elegancia</h2>
-                <div style="font-size: 0.95rem; margin-bottom: 25px; opacity: 0.9; line-height: 1.4; max-width: 500px;">
-                    Tableros de alta gama para proyectos exigentes.</div>
+                <h2 class="hero-title serif-font" style="margin-top: 10px; margin-bottom: 20px;">Melamina para tus
+                    muebles<br>al mejor precio del mercado</h2>
+                <div
+                    style="font-size: 1.2rem; margin-bottom: 25px; opacity: 0.9; line-height: 1.4; max-width: 500px; font-weight: 600; color: #d4b475;">
+                    Precio de fabricante $600</div>
                 <div class="btn-hero" onclick="document.getElementById('catalogo').scrollIntoView()">Ver Catálogo</div>
             </div>
         </div>
@@ -1556,38 +1557,15 @@
 
     </section>
 
-    <!-- CONTACT & MAP SECTION -->
+    <!-- MAP SECTION -->
     <section id="ubicacion" class="container reveal">
         <h3 class="section-title">Visítanos</h3>
-        <div class="contact-grid">
-            <!-- Map -->
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.097637777!2d-99.09259837910156!3d19.380531500000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fd0614838d17%3A0x62923da619c01792!2sIztapalapa%2C%20CDMX!5e0!3m2!1ses!2smx!4v1689623820000!5m2!1ses!2smx"
-                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-            <!-- Form -->
-            <form class="contact-form" onsubmit="submitForm(event)">
-                <h4 style="margin-bottom: 20px; font-family: 'Playfair Display', serif;">Envíanos un mensaje</h4>
-
-                <div class="form-group">
-                    <label class="form-label">Nombre Completo</label>
-                    <input type="text" class="form-input" placeholder="Tu nombre" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-input" placeholder="ejemplo@correo.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Mensaje</label>
-                    <textarea class="form-input" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
-                </div>
-
-                <button type="submit" class="btn-hero form-btn">Enviar Mensaje</button>
-            </form>
+        <div class="map-container"
+            style="width: 100%; height: 400px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft);">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.097637777!2d-99.09259837910156!3d19.380531500000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fd0614838d17%3A0x62923da619c01792!2sIztapalapa%2C%20CDMX!5e0!3m2!1ses!2smx!4v1689623820000!5m2!1ses!2smx"
+                style="border:0; width:100%; height:100%;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
 
@@ -1630,7 +1608,7 @@
                     </div>
                     <p>Expertos en soluciones para mobiliario desde 1996. Transformamos espacios con materiales de
                         vanguardia.</p>
-                    <div class="social-links">
+                    <div class="social-links" style="display: none;">
                         <a href="https://www.facebook.com/share/16wc5EqLiG/?mibextid=wwXIfr" target="_blank"
                             class="social-btn"><i class="ph ph-facebook-logo"></i></a>
                         <a href="https://www.instagram.com/el_melaminas?igsh=MTV0NzMxcGVhZ3JwOQ==" target="_blank"
@@ -1672,19 +1650,19 @@
 
     <!-- BOTTOM NAV (MOBILE) -->
     <div class="bottom-nav">
-        <div class="nav-item active">
+        <div class="nav-item active" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <span class="material-symbols-outlined">home</span>
             <span>Inicio</span>
         </div>
-        <div class="nav-item" onclick="document.getElementById('catalogo').scrollIntoView()">
+        <div class="nav-item" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">
             <span class="material-symbols-outlined">menu_book</span>
             <span>Catálogo</span>
         </div>
-        <div class="nav-item">
-            <span class="material-symbols-outlined">verified_user</span>
-            <span>Garantía</span>
+        <div class="nav-item" onclick="document.getElementById('ubicacion').scrollIntoView({behavior: 'smooth'})">
+            <span class="material-symbols-outlined">location_on</span>
+            <span>Ubicación</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" onclick="window.open('https://wa.me/525551597562', '_blank')">
             <i class="ph ph-whatsapp-logo" style="font-size: 1.5rem;"></i>
             <span>Contacto</span>
         </div>
@@ -1758,9 +1736,12 @@
                 <div style="margin-top: 20px;">
                     <div style="font-weight: 700; font-size: 0.8rem; margin-bottom: 10px;">APLICACIONES SUGERIDAS</div>
                     <div class="app-thumbnails">
-                        <img src="fotos/MARANELO.jpg" class="app-thumb" alt="Aplicación Maranelo">
-                        <img src="fotos/TOSCANA.png" class="app-thumb" alt="Aplicación Toscana">
-                        <img src="fotos/TZLAM.png" class="app-thumb" alt="Aplicación Tzlam">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=150&h=150&fit=crop"
+                            class="app-thumb">
+                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=150&h=150&fit=crop"
+                            class="app-thumb">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=150&h=150&fit=crop"
+                            class="app-thumb">
                     </div>
                 </div>
 
@@ -1778,11 +1759,6 @@
                 <div class="flex-between" style="margin-bottom: 20px;">
                     <div id="blogDate" class="trend-date"></div>
                     <i class="ph ph-x" onclick="closeBlogModal()" style="cursor:pointer; font-size: 1.5rem;"></i>
-                </div>
-                <div id="blogImageContainer"
-                    style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; height: 250px; display: none;">
-                    <img id="blogModalImage" src="" alt="Blog Post Image"
-                        style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h2 id="blogTitle" class="serif-font" style="font-size: 2.2rem; margin-bottom: 20px;"></h2>
                 <div id="blogBody" style="line-height: 1.8; color: var(--text-grey);"></div>
@@ -1837,7 +1813,6 @@
             {
                 title: "Madera y Minimalismo: El Renacimiento del Roble",
                 date: "Enero 2026",
-                image: "fotos/blog-1.jpg",
                 body: `<p>El diseño de interiores para el 2026 marca una clara tendencia hacia la honestidad de los materiales. La melamina con veta de roble claro se ha convertido en la protagonista indiscutible de los hogares modernos, buscando una conexión más profunda con la naturaleza sin sacrificar la practicidad.</p>
                        <p>Esta tendencia, a menudo denominada "Japandi Moderno", busca maximizar la luz natural combinando mobiliario en tonos miel con paredes blancas hueso y texturas orgánicas como el lino y la piedra. La clave del éxito en estos proyectos reside en la textura "Sincronizada" de nuestros tableros, que permite sentir el relieve de la madera real al tacto, elevando la percepción de calidad y lujo en cualquier espacio residencial.</p>
                        <p><strong>Consejo de diseño:</strong> Utilice grandes formatos de tablero para minimizar las juntas y crear una sensación de continuidad visual que amplíe los espacios pequeños.</p>`
@@ -1845,7 +1820,6 @@
             {
                 title: "Piedra Natural: Elegancia Industrial y Sofisticada",
                 date: "Diciembre 2025",
-                image: "fotos/blog-4.jpg",
                 body: `<p>Las cubiertas que imitan el mármol, el granito y la piedra volcánica están redefiniendo las cocinas mexicanas de alta gama. El contraste entre materiales visualmente fríos como la piedra y elementos cálidos como la iluminación LED indirecta crea un ambiente de hotel boutique directamente en tu hogar.</p>
                        <p>Nuestras melaminas de la colección 'Piedras' ofrecen esta estética de alto impacto visual con la ventaja técnica de una durabilidad superior: son resistentes a las manchas, fáciles de desinfectar y requieren cero mantenimiento comparado con la piedra natural porosa. Son ideales para familias activas que no quieren renunciar al estilo.</p>
                        <p>Para el 2026, veremos una integración total de estas texturas no solo en cocinas, sino también en revestimientos de muros de salas y chimeneas modernas.</p>`
@@ -1853,7 +1827,6 @@
             {
                 title: "La Magia del Negro Matte: Profundidad y Carácter",
                 date: "Noviembre 2025",
-                image: "fotos/blog-3.jpg",
                 body: `<p>El negro ya no es simplemente un color de acento; se ha consolidado como una elección de estilo completa y audaz. El acabado 'Matte' absoluto de nuestra línea de unicolores elimina los reflejos innecesarios y las molestas huellas dactilares, permitiendo que la forma pura del mueble sea la que hable por sí misma.</p>
                        <p>Este acabado es especialmente popular en oficinas de diseño, estudios creativos y cocinas abiertas donde la sobriedad es sinónimo de profesionalismo y elegancia. Al combinarlo con maderas claras o detalles en metal dorado, se logra un equilibrio perfecto entre lo moderno y lo clásico.</p>
                        <p><strong>Especificación Técnica:</strong> Nuestra tecnología anti-huella asegura que la superficie mantenga su aspecto aterciopelado incluso con el uso diario intenso.</p>`
@@ -1861,7 +1834,6 @@
             {
                 title: "Vetas Sincronizadas: El Tacto de lo Real en cada Detalle",
                 date: "Octubre 2025",
-                image: "fotos/blog-2.jpg",
                 body: `<p>La tecnología de poro sincronizado ha marcado un antes y un después en la industria de la melamina a nivel global. Al hacer coincidir matemáticamente la textura táctil con el dibujo visual de la veta impresa, logramos un material que es prácticamente indistinguible de la madera natural, incluso para el ojo experto.</p>
                        <p>Esta colección es la respuesta perfecta para arquitectos y diseñadores que buscan la calidez y el prestigio de la madera sólida pero necesitan la consistencia, resistencia y facilidad de transformación que solo un tablero industrial de alta densidad puede ofrecer.</p>
                        <p>Desde muebles de baño hasta revestimientos comerciales de alto tráfico, las vetas sincronizadas ofrecen una solución estética sin precedentes con un costo-beneficio inigualable.</p>`
@@ -1869,7 +1841,6 @@
             {
                 title: "Espacios Multifuncionales: Adaptabilidad para la Vida Moderna",
                 date: "Septiembre 2025",
-                image: "fotos/blog-5.jpg",
                 body: `<p>El hogar actual ha evolucionado y ya no permite habitaciones con un solo propósito. La cocina hoy es oficina, el dormitorio es estudio y la sala es zona de juegos. El diseño de mobiliario inteligente se adapta a esta realidad con piezas versátiles, modulares y estéticamente neutras que no sobrecargan el ambiente.</p>
                        <p>En este contexto, nuestras colecciones de unicolores y textiles (como el Lino Grafito) ofrecen la base neutra ideal para crear estos espacios armónicos. La clave es el equilibrio: mobiliario funcional que parece decoración cuando no está en uso.</p>
                        <p>Aprovechar cada centímetro cuadrado con diseños a medida elaborados con materiales de alta calidad es la mejor inversión para mejorar la calidad de vida urbana.</p>`
@@ -1877,7 +1848,6 @@
             {
                 title: "Compromiso con la Sustentabilidad: Diseño con Conciencia",
                 date: "Agosto 2025",
-                image: "fotos/blog-6.jpg",
                 body: `<p>En El Melaminas, entendemos profundamente que el futuro del diseño debe ser sustentable o no será. Nuestro compromiso no es solo una palabra; trabajamos exclusivamente con proveedores globales que cuentan con las más estrictas certificaciones de manejo forestal responsable y economía circular.</p>
                        <p>Nuestros procesos de logística y distribución están optimizados para reducir la huella de carbono, y nos aseguramos de que cada tablero que llega a tus manos sea el resultado de una cadena de valor ética, transparente y consciente del medio ambiente.</p>
                        <p>Al elegir nuestros materiales, no solo estás eligiendo belleza y durabilidad, sino que también estás apoyando una industria que protege los recursos para las generaciones venideras.</p>`
@@ -2095,7 +2065,7 @@
             const realImg = document.createElement('img');
             realImg.src = `fotos/${p.image}`;
             realImg.className = 'modal-real-img';
-            realImg.style.cssText = 'position:absolute; top:0; left:0; width:100% !important; height:100% !important; object-fit:cover !important; opacity:0; transition: opacity 0.5s; z-index:1;';
+            realImg.style.cssText = 'position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; transition: opacity 0.5s; z-index:1;';
             realImg.onload = () => {
                 realImg.style.opacity = '1';
                 realImg.classList.add('loaded');
@@ -2149,50 +2119,6 @@
             modal.style.display = 'flex';
             // Small delay for animation
             setTimeout(() => modal.classList.add('open'), 10);
-
-            // Init Zoom listeners only once
-            initProductZoom();
-        }
-
-        function initProductZoom() {
-            const container = document.getElementById('modalImg');
-            // Remove old listeners to avoid stacking
-            const newContainer = container.cloneNode(true);
-            container.parentNode.replaceChild(newContainer, container);
-
-            newContainer.addEventListener('click', function (e) {
-                const img = this.querySelector('.modal-real-img');
-                if (!img) return;
-                img.classList.toggle('zoomed');
-                if (!img.classList.contains('zoomed')) {
-                    img.style.transformOrigin = 'center center';
-                }
-            });
-
-            newContainer.addEventListener('mousemove', function (e) {
-                const img = this.querySelector('.modal-real-img');
-                if (!img || !img.classList.contains('zoomed')) return;
-
-                const rect = this.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-                img.style.transformOrigin = `${x}% ${y}%`;
-            });
-
-            // Touch support for mobile zoom
-            newContainer.addEventListener('touchmove', function (e) {
-                const img = this.querySelector('.modal-real-img');
-                if (!img || !img.classList.contains('zoomed')) return;
-                e.preventDefault();
-
-                const touch = e.touches[0];
-                const rect = this.getBoundingClientRect();
-                const x = ((touch.clientX - rect.left) / rect.width) * 100;
-                const y = ((touch.clientY - rect.top) / rect.height) * 100;
-
-                img.style.transformOrigin = `${x}% ${y}%`;
-            }, { passive: false });
         }
 
         function closeModal() {
@@ -2210,16 +2136,6 @@
             document.getElementById('blogTitle').innerText = article.title;
             document.getElementById('blogDate').innerText = article.date;
             document.getElementById('blogBody').innerHTML = article.body;
-
-            // Handle Blog Image
-            const imgContainer = document.getElementById('blogImageContainer');
-            const modalImg = document.getElementById('blogModalImage');
-            if (article.image) {
-                modalImg.src = article.image;
-                imgContainer.style.display = 'block';
-            } else {
-                imgContainer.style.display = 'none';
-            }
 
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('open'), 10);
