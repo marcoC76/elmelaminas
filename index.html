@@ -1758,12 +1758,9 @@
                 <div style="margin-top: 20px;">
                     <div style="font-weight: 700; font-size: 0.8rem; margin-bottom: 10px;">APLICACIONES SUGERIDAS</div>
                     <div class="app-thumbnails">
-                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=150&h=150&fit=crop"
-                            class="app-thumb">
-                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=150&h=150&fit=crop"
-                            class="app-thumb">
-                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=150&h=150&fit=crop"
-                            class="app-thumb">
+                        <img src="fotos/MARANELO.jpg" class="app-thumb" alt="Aplicación Maranelo">
+                        <img src="fotos/TOSCANA.png" class="app-thumb" alt="Aplicación Toscana">
+                        <img src="fotos/TZLAM.png" class="app-thumb" alt="Aplicación Tzlam">
                     </div>
                 </div>
 
@@ -2098,7 +2095,7 @@
             const realImg = document.createElement('img');
             realImg.src = `fotos/${p.image}`;
             realImg.className = 'modal-real-img';
-            realImg.style.cssText = 'position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; transition: opacity 0.5s; z-index:1;';
+            realImg.style.cssText = 'position:absolute; top:0; left:0; width:100% !important; height:100% !important; object-fit:cover !important; opacity:0; transition: opacity 0.5s; z-index:1;';
             realImg.onload = () => {
                 realImg.style.opacity = '1';
                 realImg.classList.add('loaded');
