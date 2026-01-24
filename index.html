@@ -341,9 +341,11 @@
         }
 
         .prod-img {
+            width: 100%;
             height: 180px;
             overflow: hidden;
             position: relative;
+            background: var(--bg-body);
         }
 
         .prod-texture {
@@ -360,9 +362,13 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100% !important;
+            height: 100% !important;
+            min-width: 100% !important;
+            min-height: 100% !important;
+            max-width: none !important;
+            object-fit: cover !important;
+            object-position: center;
             opacity: 0;
             transition: opacity 0.5s ease;
             z-index: 2;
@@ -1362,7 +1368,7 @@
                     excepcional. Definitivamente volveré a comprar para mis próximos proyectos."</p>
                 <div style="display:flex; align-items:center;">
                     <div class="user-avatar"
-                        style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg'); background-size: cover;">
+                        style="background-image: url('fotos/persona2.jpg'); background-size: cover;">
                     </div>
                     <div>
                         <div style="font-weight: 700; font-size: 0.9rem;">Carlos Ruiz</div>
@@ -1376,7 +1382,7 @@
                     rapidísimo y el material llegó en perfectas condiciones. ¡Muy recomendados!"</p>
                 <div style="display:flex; align-items:center;">
                     <div class="user-avatar"
-                        style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg'); background-size: cover;">
+                        style="background-image: url('fotos/persona1.jpg'); background-size: cover;">
                     </div>
                     <div>
                         <div style="font-weight: 700; font-size: 0.9rem;">Ana Morales</div>
@@ -1390,7 +1396,7 @@
                     texturas. Encontré justo el acabado piedra que mi cliente estaba buscando."</p>
                 <div style="display:flex; align-items:center;">
                     <div class="user-avatar"
-                        style="background-image: url('https://randomuser.me/api/portraits/men/85.jpg'); background-size: cover;">
+                        style="background-image: url('fotos/persona3.jpg'); background-size: cover;">
                     </div>
                     <div>
                         <div style="font-weight: 700; font-size: 0.9rem;">Roberto G.</div>
@@ -1423,8 +1429,7 @@
             </div>
             <div class="trends-grid">
                 <article class="trend-card" onclick="openBlogModal(0)">
-                    <div class="trend-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1513519247388-19345ed5d467?w=400&q=80');">
+                    <div class="trend-img" style="background-image: url('fotos/blog-1.jpg');">
                     </div>
                     <div class="trend-content">
                         <div class="trend-date">Enero 2026</div>
@@ -1434,8 +1439,7 @@
                     </div>
                 </article>
                 <article class="trend-card" onclick="openBlogModal(1)">
-                    <div class="trend-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&q=80');">
+                    <div class="trend-img" style="background-image: url('fotos/blog-4.jpg');">
                     </div>
                     <div class="trend-content">
                         <div class="trend-date">Diciembre 2025</div>
@@ -1445,8 +1449,7 @@
                     </div>
                 </article>
                 <article class="trend-card" onclick="openBlogModal(2)">
-                    <div class="trend-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=80');">
+                    <div class="trend-img" style="background-image: url('fotos/blog-3.jpg');">
                     </div>
                     <div class="trend-content">
                         <div class="trend-date">Noviembre 2025</div>
@@ -1457,8 +1460,7 @@
                     </div>
                 </article>
                 <article class="trend-card" onclick="openBlogModal(3)">
-                    <div class="trend-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=400&q=80');">
+                    <div class="trend-img" style="background-image: url('fotos/blog-2.jpg');">
                     </div>
                     <div class="trend-content">
                         <div class="trend-date">Octubre 2025</div>
@@ -1468,8 +1470,7 @@
                     </div>
                 </article>
                 <article class="trend-card" onclick="openBlogModal(4)">
-                    <div class="trend-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&q=80');">
+                    <div class="trend-img" style="background-image: url('fotos/blog-5.jpg');">
                     </div>
                     <div class="trend-content">
                         <div class="trend-date">Septiembre 2025</div>
@@ -1479,8 +1480,7 @@
                     </div>
                 </article>
                 <article class="trend-card" onclick="openBlogModal(5)">
-                    <div class="trend-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=400&q=80');">
+                    <div class="trend-img" style="background-image: url('fotos/blog-6.jpg');">
                     </div>
                     <div class="trend-content">
                         <div class="trend-date">Agosto 2025</div>
